@@ -1,9 +1,10 @@
---
+---
 iofoguser:
   name: Foo
   surname: Bar
-  email: user@domain.com
-  password: iht234g9afhe
+  email: galo@bromo.dev
+  password: hello.moto.1
 controllers:
 - name: alpaca-1
   kubeconfig: ~/.kube/config"
+---

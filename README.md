@@ -120,13 +120,14 @@ ssh-copy-id galo@derr.local
 
 This section go over teh steps to setup ioFog contro lpane on a Kubernetes cluster.
 
-
 ### Install iofog Control Plane on Kubernetes using Minikube 
 
-This will setup iofog in a [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) local enviroment
+This will setup iofog in a [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) local enviroment.
 
 
-
+```shell
+iofogctl deploy controlplane -f build/k8s/controlplane.yaml
+```
 
 
 ### Install iofog Control Plane on Kubernetes using microk8s
