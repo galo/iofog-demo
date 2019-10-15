@@ -1,0 +1,9 @@
+--
+iofoguser:
+  name: Foo
+  surname: Bar
+  email: user@domain.com
+  password: iht234g9afhe
+controllers:
+- name: alpaca-1
+  kubeconfig: ~/.kube/config"

@@ -4,7 +4,7 @@ controlplane:
     name: Quick
     surname: Start
     email: galo@bromo.dev
-    password: hello.moto1
+    password: <pass word here>
   controllers:
   - name: local-controller
     host: localhost

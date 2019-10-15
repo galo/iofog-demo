@@ -75,56 +75,72 @@ heart-rate-monitor	RUNNING		local-agent	{"data_label":"Anonymous Person","test_m
 heart-rate-viewer	RUNNING		local-agent	{}										/tmp/msvc:/tmp	5000:80
 ```
 
-## Check the application
+### Check the application
 
 Access the UI opning the link [http://horus.local:5000/](http://horus.local:5000/)
 
-## Tear down
+### Tear down
 
 ```
 iofogctl delete all
 ```
 
-# Install ioFog on RPI3 
+## Install ioFog on  Raspberry PI
 
 In this step we will configure a RPI3 devicde to run as a node connected to the control plane, following [this guide](https://iofog.org/docs/1.3.0/remote-deployment/prepare-your-remote-hosts.html)
 
-## Setup teh RPI devices
+## Setup the RPI devices
 
 ### Setup Raspian
+
 Change pi user passwd
 Enable Wifi
 Enable SSH
 Change Host Name
 
-```
+```shell
 raspi-config
 ```
 
 Add user and set it up as a sudoer
 
+```
+usermod -aG sudo $USER
+```
 
 ### Add your key in to the RPI device
 
-```
+```shell
 ssh-copy-id galo@derr.local
 ```
 
+### Pre
+
+## Kubernetes
+
+This section go over teh steps to setup ioFog contro lpane on a Kubernetes cluster.
+
+
+### Install iofog Control Plane on Kubernetes using Minikube 
+
+This will setup iofog in a [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) local enviroment
 
 
 
 
-## Install iofog Control Plane on Kubernetes using microk8s
+
+### Install iofog Control Plane on Kubernetes using microk8s
 
 In this step we will setup ifogctl on kubernetes, you can use minikube, or microk8s. In this scenario I will use microk8s.
 
-## Enable helm
+### Enable helm
 
 ```shell
 microk8s.enable helm.
 ```
 
 ### Install ioFog Stack
+
 Add this repository to your Helm repository index and install the ioFog stack and Kubernetes services
 
 microk8s.helm init --service-account tiller
@@ -135,10 +151,10 @@ microk8s.helm repo add iofog https://eclipse-iofog.github.io/helm
 microk8s.helm install --name iofog --namespace iofog iofog/iofog
 ```
 
-## Install iofog Control Plane on Kubernetes using minikube
+### Install iofog Control Plane on Kubernetes using minikube and Helm
 
 
-### Create Service Account for Tiller
+#### Create Service Account for Tiller
 
 Note that on RBAC enabled Kubernetes clusters (e.g. GKE, AKE) it is necessary to create a service account for Tiller before initializing helm. See helm init instructions for more details.
 
@@ -147,7 +163,8 @@ kubectl create -f build/eks/helm-service-account.yaml
 helm init --service-account tiller
 ```
 
-### Install ioFog Stack
+#### Install ioFog Stack with Helm
+
 Add this repository to your Helm repository index and install the ioFog stack and Kubernetes services
 
 ```shell
@@ -155,11 +172,6 @@ helm repo add iofog https://eclipse-iofog.github.io/helm
 helm install --name iofog --namespace iofog iofog/iofog
 ```
 
-## Install OpenfaaS
-
-The next step will be to setup OpenFaaS in [iofog]()
-
-
-# References
+## References
 
 1. [ioFog](https://iofog.org/docs/1.3.0/tutorial/get-to-know-iofog.html)
