@@ -4,7 +4,7 @@ Setting up a cluster with [iofog](https://iofog.org/).
 
 Iofog system runs as a Fog Controller and a set of IoFogAgents on each of the devices.
 
-![iOFigArchitecture](docs/diagramiofog.jpg)
+![ioFog Architecture](docs/diagramiofog.jpg)
 
 The ComnSat or Connector helps to stablish teh network between the controller and the nodes that run that agents.
 
@@ -44,18 +44,58 @@ commit: c74b764a7876127829489167d008eea3c4443a92
 date: 2019-10-15T13:09:23-0600
 ```
 
-## Install iofog Control Plane on Kubernetes
+## Install iofog Control Plane om Docker
+
+Edit the build/iofog/quick-start.yaml to configure a password you want to use
+
+```shell
+iofogctl deploy -f build/iofog/quick-start.yaml
+```
+
+
+## Install iofog Control Plane on Kubernetes using microk8s
 
 In this step we will setup ifogctl on kubernetes, you can use minikube, or microk8s. In this scenario I will use microk8s.
+
+## Enable helm
+
+```shell
+microk8s.enable helm.
+```
+
+### Install ioFog Stack
+Add this repository to your Helm repository index and install the ioFog stack and Kubernetes services
+
+
+microk8s.helm init --service-account tiller
+
+
+```shell
+microk8s.helm repo add iofog https://eclipse-iofog.github.io/helm
+microk8s.helm install --name iofog --namespace iofog iofog/iofog
+```
+
+
+## Install iofog Control Plane on Kubernetes using minikube
+
 
 ### Create Service Account for Tiller
 
 Note that on RBAC enabled Kubernetes clusters (e.g. GKE, AKE) it is necessary to create a service account for Tiller before initializing helm. See helm init instructions for more details.
 
-```
+```shell
 kubectl create -f build/eks/helm-service-account.yaml
 helm init --service-account tiller
 ```
+
+### Install ioFog Stack
+Add this repository to your Helm repository index and install the ioFog stack and Kubernetes services
+
+```shell
+helm repo add iofog https://eclipse-iofog.github.io/helm
+helm install --name iofog --namespace iofog iofog/iofog
+```
+
 
 ## Install OpenfaaS
 

@@ -1,0 +1,17 @@
+---
+controlplane:
+  iofoguser:
+    name: Quick
+    surname: Start
+    email: galo@bromo.dev
+    password: <you password here>
+  controllers:
+  - name: local-controller
+    host: localhost
+connectors:
+- name: local-connector
+  host: localhost
+agents:
+ - name: local-agent
+   host: localhost"
+---
