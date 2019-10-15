@@ -3,8 +3,7 @@ iofoguser:
   name: Foo
   surname: Bar
   email: galo@bromo.dev
-  password: hello.moto.1
+  password: <you password here>
 controllers:
 - name: alpaca-1
-  kubeconfig: ~/.kube/config"
----
+  kubeconfig: ~/.kube/config
