@@ -1,6 +1,6 @@
 # iofog-demo
 
-Setting up a cluster with [iofog](https://iofog.org/). 
+Setting up a cluster with [iofog](https://iofog.org/), based on the [quick start guide](https://iofog.org/docs/1.3.0/getting-started/quick-start.html)
 
 Iofog system runs as a Fog Controller and a set of IoFogAgents on each of the devices.
 
@@ -53,6 +53,67 @@ iofogctl deploy -f build/iofog/quick-start.yaml
 ```
 
 
+## Install a sample application
+
+The next step is to deploy a sample application into the control plane, that is just managing a single localhost node.
+
+
+```shell
+iofogctl deploy -f heart-rate-app.yaml
+```
+
+
+Check the status of the application, untill both micro services are running.
+
+```shell
+iofogctl get microservices
+```
+
+```
+MICROSERVICE		STATUS		AGENT		CONFIG							ROUTES			VOLUMES		PORTS
+heart-rate-monitor	RUNNING		local-agent	{"data_label":"Anonymous Person","test_mode":true}	heart-rate-viewer
+heart-rate-viewer	RUNNING		local-agent	{}										/tmp/msvc:/tmp	5000:80
+```
+
+## Check the application
+
+Access the UI opning the link [http://horus.local:5000/](http://horus.local:5000/)
+
+## Tear down
+
+```
+iofogctl delete all
+```
+
+# Install ioFog on RPI3 
+
+In this step we will configure a RPI3 devicde to run as a node connected to the control plane, following [this guide](https://iofog.org/docs/1.3.0/remote-deployment/prepare-your-remote-hosts.html)
+
+## Setup teh RPI devices
+
+### Setup Raspian
+Change pi user passwd
+Enable Wifi
+Enable SSH
+Change Host Name
+
+```
+raspi-config
+```
+
+Add user and set it up as a sudoer
+
+
+### Add your key in to the RPI device
+
+```
+ssh-copy-id galo@derr.local
+```
+
+
+
+
+
 ## Install iofog Control Plane on Kubernetes using microk8s
 
 In this step we will setup ifogctl on kubernetes, you can use minikube, or microk8s. In this scenario I will use microk8s.
@@ -66,7 +127,6 @@ microk8s.enable helm.
 ### Install ioFog Stack
 Add this repository to your Helm repository index and install the ioFog stack and Kubernetes services
 
-
 microk8s.helm init --service-account tiller
 
 
@@ -74,7 +134,6 @@ microk8s.helm init --service-account tiller
 microk8s.helm repo add iofog https://eclipse-iofog.github.io/helm
 microk8s.helm install --name iofog --namespace iofog iofog/iofog
 ```
-
 
 ## Install iofog Control Plane on Kubernetes using minikube
 
@@ -95,7 +154,6 @@ Add this repository to your Helm repository index and install the ioFog stack an
 helm repo add iofog https://eclipse-iofog.github.io/helm
 helm install --name iofog --namespace iofog iofog/iofog
 ```
-
 
 ## Install OpenfaaS
 

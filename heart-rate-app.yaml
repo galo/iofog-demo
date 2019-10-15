@@ -1,0 +1,39 @@
+---
+applications:
+  - name: "HealthcareWearableExample"
+    microservices:
+    - name: "heart-rate-monitor"
+      agent:
+        name: local-agent
+        config:
+          bluetoothEnabled: true # this will install the iofog/restblue microservice
+          abstractedHardwareEnabled: false
+      images: # Microservice docker images
+        arm: "edgeworx/healthcare-heart-rate:arm-v1"
+        x86: "edgeworx/healthcare-heart-rate:x86-v1"
+      roothostaccess: false
+      ports: []
+      config:
+        test_mode: true
+        data_label: "Anonymous Person"
+    - name: "heart-rate-viewer"
+      agent:
+        name: local-agent
+      images:
+        arm: "edgeworx/healthcare-heart-rate-ui:arm"
+        x86: "edgeworx/healthcare-heart-rate-ui:x86"
+      roothostaccess: false
+      ports:
+        - external: 5000
+          internal: 80
+      volumes:
+        - hostdestination: /tmp/msvc
+          containerdestination: /tmp
+          accessmode: rw # access mode
+      env:
+        - key: "BASE_URL"
+          value: "http://localhost:8080/data"
+    routes:
+    - from: "heart-rate-monitor"
+      to: "heart-rate-viewer"
+---
