@@ -6,5 +6,4 @@ iofoguser:
   password: hello.moto.1
 controllers:
 - name: alpaca-1
-  kubeconfig: ~/.kube/config"
-   ---
+  kubeconfig: ~/.kube/config   
