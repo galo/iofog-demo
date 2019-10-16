@@ -1,0 +1,11 @@
+---
+iofoguser:
+  name: Foo
+  surname: Bar
+  email: user@domain.com
+  password: iht234g9afhe
+controllers:
+- name: alpaca-1
+  user: galo
+  host: luxor.local
+  keyfile: ~/.ssh/id_rsa

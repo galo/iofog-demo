@@ -120,15 +120,21 @@ ssh-copy-id galo@derr.local
 
 This section go over teh steps to setup ioFog contro lpane on a Kubernetes cluster.
 
-### Install iofog Control Plane on Kubernetes using Minikube 
+### Install iofog Control Plane on Kubernetes using Minikube
 
 This will setup iofog in a [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) local enviroment.
 
-
 ```shell
-iofogctl deploy controlplane -f build/k8s/controlplane.yaml
+iofogctl deploy controlplane -f build/iofog/controlplane.yaml
 ```
 
+### Deploy Controllers on Remote Hosts
+
+```shell
+iofogctl deploy controlplane -f /build/iofog/remote_controller.yaml
+```
+
+## Helm Install
 
 ### Install iofog Control Plane on Kubernetes using microk8s
 
@@ -137,7 +143,7 @@ In this step we will setup ifogctl on kubernetes, you can use minikube, or micro
 ### Enable helm
 
 ```shell
-microk8s.enable helm.
+microk8s.enable helm
 ```
 
 ### Install ioFog Stack

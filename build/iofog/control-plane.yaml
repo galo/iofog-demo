@@ -7,3 +7,4 @@ iofoguser:
 controllers:
 - name: alpaca-1
   kubeconfig: ~/.kube/config
+
