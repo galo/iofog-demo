@@ -130,6 +130,8 @@ iofogctl deploy controlplane -f build/iofog/controlplane.yaml
 
 ### Deploy Controllers on Remote Hosts
 
+Make sure you Raspberry is connected and working, the controller willl try top connect to the address _luxor.local_ using the credentials described above
+
 ```shell
 iofogctl deploy controlplane -f /build/iofog/remote_controller.yaml
 ```
