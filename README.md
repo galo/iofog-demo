@@ -132,8 +132,24 @@ iofogctl deploy controlplane -f build/iofog/controlplane.yaml
 
 Make sure you Raspberry is connected and working, the controller willl try top connect to the address _luxor.local_ using the credentials described above
 
+The controller will SSH into the RaspberryPi using SSH, therefore you need to setup crendetials on teh RPI device
+
+
 ```shell
-iofogctl deploy controlplane -f /build/iofog/remote_controller.yaml
+ssh-copy-id luxor.local
+```
+Ass the user into teh sudoer list on teh RPI
+
+```shell
+ssh luxor.local
+sudo usermod -aG sudo $USER
+```
+
+
+
+
+```shell
+iofogctl deploy controlplane -f build/iofog/remote_controller.yaml
 ```
 
 ## Helm Install
